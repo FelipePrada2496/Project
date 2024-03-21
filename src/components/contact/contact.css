@@ -1,0 +1,14 @@
+.title_Contact {
+    margin-top: 10%;
+    font-size: 36px;
+    font-weight: 500;
+    padding-left: 60px;
+}
+
+.green_line_contacts {
+    background-color: #C1D72F;
+    height: 2px;
+    width: 850px;
+    margin-left: 280px;
+    margin-top: -1.5%;
+}
