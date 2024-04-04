@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import './new.css'; 
+import { useForm } from '../../hooks/useForm';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../reducers/contactSlices';
+import { addContactApi } from '../../services/api2';
 
-function New() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [isChecked, setIsChecked] = useState(false);
+function New () {
 
-    const handleFirstNameChange = (e) => {
-        setFirstName(e.target.value);
-    };
+    const dispatch = useDispatch()
 
-    const handleLastNameChange = (e) => {
-        setLastName(e.target.value);
-    };
+    const {first_name, last_name, email, isFavorite, onInputChange, resetForm} = useForm({
+        first_name: '',
+        last_name: '',
+        email: '',
+        isFavorite: false
+    })
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleCheckboxChange = (e) => {
-        setIsChecked(e.target.checked);
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Formulario enviado:', { firstName, lastName, email, isChecked });
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setIsChecked(false);
+        console.log({first_name, last_name, email, isFavorite})
+        const user = ({first_name, last_name, email, isFavorite, isDeleted: false})
+        dispatch(addContact(user))
+        await addContactApi(user)
+        resetForm(); // Resetear el formulario después de enviar
+        setFormOpen(false); // Cerrar el formulario después de enviar
+    };
+
+    const toggleForm = () => {
+        setFormOpen(!formOpen); // Cambiar el estado del formulario
     };
 
     return (
@@ -37,26 +35,34 @@ function New() {
             <div className="container_new">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} placeholder="First Name" />
+                        <input name ='first_name' type="text" id="firstName" value={first_name} onChange={onInputChange} placeholder="First Name" className='container_new_input'/>
                     </div>
                     <div>
-                        <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} placeholder="Last Name" />
+                        <input name ='last_name' type="text" id="lastName" value={last_name} onChange={onInputChange} placeholder="Last Name" className='container_new_input'/>
                     </div>
                     <div>
-                        <input type="email" id="email" value={email} onChange={handleEmailChange} placeholder="Email" />
+                        <input name ='email' type="email" id="email" value={email} onChange={onInputChange} placeholder="Email" className='container_new_input' />
                     </div>
                     <div>
                         <label>
                             <div className='checkbox'>
-                                <p>Enable like favorite</p>
-                                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}  />
+                                nable like favorite
+                                <input name ='isFavorite' type="checkbox" checked={isFavorite} onChange={onInputChange} className='boton_checkbox' />
                             </div>
                         </label>
+                        <div className='button_save'>
+                            <button type="submit">Save</button>
+                            <button type="button" onClick={toggleForm}>Cancel</button> {/* Agregar un botón de cancelar */}
+  
+                        </div>
                     </div>
-                    <button type="submit">Save</button>
+                    
                 </form>
+                
             </div>
         </div>
+
+        
     );
 }
 

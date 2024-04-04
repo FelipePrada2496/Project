@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Overview from '../components/overview/overview';
-import Contact from '../components/contact/contact';
-import Favorites from '../components/favorites/favorites';
+import {Route, Routes} from 'react-router-dom';
+import Overview from '../pages/overview/overview';
+import Contact from '../pages/contact/contact';
+import Favorites from '../pages/favorites/favorites';
+import VistaNew from '../pages/vista-new/vista-new';
 
-function Routes() {
+function AppRouter() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Overview} />
-        <Route path="/contacts" component={Contact} />
-        <Route path="/favorites" component={Favorites} />
-      </Switch>
-    </Router>
+    <Routes>
+        <Route path="/" element={<Overview/>} />
+        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/contacts" element={<Contact ver ="overwiew"/>} />
+        <Route path="/vistaNew" element={<VistaNew/>} />
+    </Routes>
   );
 }
 
-export default Routes;
+export default AppRouter;

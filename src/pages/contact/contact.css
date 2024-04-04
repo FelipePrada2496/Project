@@ -1,0 +1,71 @@
+.title-contacts {
+    font-size: 36px;
+    font-weight: 500;
+    margin-top: 5rem;
+}
+
+.contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 60px;
+    justify-content: space-around;
+}  
+
+.green-line-contacts {
+    background-color: #C1D72F;
+    height: 2px;
+    width: 82%;
+    margin-left: auto;
+    margin-top: -1.5%;
+}
+
+.margin-contacts {
+    margin: 3rem;
+}
+
+@media (max-width: 1024px) {
+    .title-contacts {
+        font-size: 2.2rem;
+    }
+
+    .green-line-contacts {
+        width: 75%;
+        margin-top: -2.1%;
+    }
+
+    .margin-contacts {
+        margin: 0 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-contacts {
+        font-size: 1.9rem;
+    }
+
+    .green-line-contacts {
+        width: 72%;
+        margin-top: -2.1%;
+    }
+
+    .margin-contacts {
+        margin: 0 2rem;
+    }
+}
+
+@media (max-width: 440px) {
+    .title-contacts {
+        font-size: 1.4rem;
+    }
+
+    .green-line-contacts {
+        width: 65%;
+        height: 0.1rem;
+        margin-top: -3%;
+    }
+
+    .margin-contacts {
+        margin: 0 1rem;
+    }
+}
